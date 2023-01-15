@@ -13,9 +13,9 @@ help: ## prints out the list of targets and their usage.
 				cat README.md
 
 
-package: ## target package create a file named awesome-website.zip
-				hugo
-				zip awesome-website.zip awesome-api dist/
+package:
+		hugo
+		zip awesome-website.zip awesome-api dist/
 
 lint: ## The target lint should be updated to lint the files README.md and DEPLOY.md with markdownlint
 				markdownlint "*.md"
