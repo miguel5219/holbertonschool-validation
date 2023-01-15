@@ -18,7 +18,7 @@ package:
 		zip awesome-website.zip awesome-api dist/
 
 lint: ## The target lint should be updated to lint the files README.md and DEPLOY.md with markdownlint
-				@markdownlint "*.md"
+				markdownlint "*.md"
 
 unit-tests: ## run unit tests
 				@echo "all tests done"
