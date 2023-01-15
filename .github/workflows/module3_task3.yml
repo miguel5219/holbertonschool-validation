@@ -2,7 +2,7 @@ name: module3_task3
 on:
   push:
     branches:
-      - main
+      - master
     tags:
       - "1.0.0"
   schedule:
