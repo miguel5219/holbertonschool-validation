@@ -37,16 +37,16 @@ func Test_server(t *testing.T) {
 			body:         "ALIVE",
 		},
 		{
-			name:         "With two name parameters",
-			queryString:  "name=Giovanni&name=Miguel",
-			responseCode: 200,
-			body:         "Hello Miguel!",
-		},
-		{
 			name:         "Empty name",
-			queryString:  "/hello",
+			URI:          "/hello",
 			responseCode: 200,
 			body:         "Hello there!",
+		},
+		{
+			name:         "With two name parameters",
+			URI:          "/hello?name=Giovanni&name=Miguel",
+			responseCode: 200,
+			body:         "Hello Miguel!",
 		},
 	}
 
