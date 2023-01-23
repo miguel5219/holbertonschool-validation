@@ -1,25 +1,30 @@
-name: release_drafter
-
-on:
-  push:
-    tags: "1.0.1"
-    branches:
-      - master
-  pull_request:
-    types: [opened, reopened, synchronize]
-    branches:
-      - master
-
-jobs:
-  update_release_draft:
-    permissions: write-all
-    name: release_drafter_job
-    runs-on: ubuntu-18.04
-
-    steps:
-      - name: release drafter
-        uses: release-drafter/release-drafter@v5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          labels: "changelog"
-          output: changelog.md
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: 'Features'
+    labels:
+      - 'feature'
+      - 'enhancement'
+  - title: 'Bug Fixes'
+    labels:
+      - 'fix'
+      - 'bugfix'
+      - 'bug'
+  - title: 'Maintenance'
+    label: 'chore'
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-title-escapes: '\<*_&'
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch
+template: |
+  ## Changes
+  $CHANGES
