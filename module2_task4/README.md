@@ -4,12 +4,9 @@
 go and make installed
 
 ## Lifecycle
-build:	 Build the API binary file
-run:	 Run the build binary and save everything to awesome.log
-stop:	 Stop the execution of awesome-api
-clean:	 Remove binary and logs
-test:	 Test API using curl
-lint:    lints all go files using golangci-lint
-unit-tests:     Run all unit-tests using go test
-integration-tests: run integration tests
-help:	 Show help message
+build: Builds a website using gohugo on the dist folder
+clean: Cleans the dist folder
+post: Create a new blog post whose filename and title come from the environment variables POST_TITLE and POST_NAME
+check:   Lints and check for dead links on markdowns using markdownlint-cli and markdown-link-check
+validate:  Validates dist/index.html using W3C Hbtn validator
+help: Shows this help
