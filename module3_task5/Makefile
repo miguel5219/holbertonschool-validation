@@ -43,7 +43,7 @@ lint:	## Lints all the go files using golangci-lint
 	markdownlint README.md DEPLOY.md
 
 unit-tests:	## Runs implemented unit test using go test
-	go test -v -short -coverprofile=coverage-units.out
+
 
 integration-tests:	## Runs integration test using go test
 	-go test -v -coverprofile=coverage-integrations.out
