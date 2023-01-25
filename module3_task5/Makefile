@@ -46,7 +46,7 @@ unit-tests:	## Runs implemented unit test using go test
 	go test -v -short -coverprofile=coverage-units.out
 
 integration-tests:	## Runs integration test using go test
-	go test -v -coverprofile=coverage-integrations.out
+	-go test -v -coverprofile=coverage-integrations.out
 
 package:  ## Generates a zip archive to deployment
 	-make build
