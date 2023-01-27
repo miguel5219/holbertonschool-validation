@@ -1,0 +1,61 @@
+---
+name: module3_task5
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - 1.0.0
+  schedule:
+    - cron: '0 0 * * *'
+  pull_request:
+    types:
+      - opened
+jobs:
+  module3_task5:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: |
+          npm install -g markdownlint-cli markdown-link-check
+          cd module3_task5
+          sudo ./setup.sh
+          make build
+          make help
+          make validate
+          make test
+          make package
+          make lint
+      - name: Archive generated zip
+        uses: actions/upload-artifact@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          name: awesome-website
+          path: module3_task5/awesome-website.zip
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body_path: module3_task5/DEPLOY.md
+          files: |
+            module3_task5/awesome-website.zip
+      - name: deploy
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: './module3_task5/dist'
+          production-branch: main
+          production-deploy: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "🚀 Deployed on"
+          publish-message: "🎉 Published on"
+          enable-pull-request-comment: true
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
